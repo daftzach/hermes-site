@@ -7,6 +7,18 @@
 </head>
 <body>
 	<!-- Output nav -->
+	<?php
+	include('navigation.php');
+	?>
+
+	<!-- Meat and potatoes -->
+	<div class="container-fluid">
+		<p>Content will go here...</p>
+	</div>
+
 	<!-- Output footer -->
+	<?php
+	include('footer.php');
+	?>
 </body>
 </html>
