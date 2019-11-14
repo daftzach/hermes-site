@@ -11,8 +11,12 @@
 	include('navigation.php');
 	?>
 
+	<div class="jumbotron">
+		<h1>Hermes</h1>
+	</div>
+
 	<!-- Meat and potatoes -->
-	<div class="container-fluid">
+	<div class="container">
 		<p>Content will go here...</p>
 	</div>
 
