@@ -6,7 +6,7 @@ $errorHTML = "";
 $infoHTML = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-	
+
 	$connection = connectDB("../../dev/hermes/creds.ini");
 	$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

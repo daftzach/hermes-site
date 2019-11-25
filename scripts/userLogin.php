@@ -37,7 +37,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$user_id = $row["user_id"];
 			$hashedPassword = $row["password"];
 			if(password_verify($password, $hashedPassword)) {
-				echo("success");
+				session_start();
+				$_SESSION['loggedIn'] = true;
+				$_SESSION['username'] = $username;
 			} else {
 				array_push($errors, "Password is incorrect.");
 			}
