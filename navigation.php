@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
 	<a class="navbar-brand" href="#">Hermes</a>
 	<ul class="navbar-nav mr-auto">
@@ -7,7 +9,22 @@
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
 		<!-- Only display if user logged out -->
-		<li><a class="btn btn-info ml-auto mr-1" href="register.php" role="button">Sign up</a></li>
-		<li><a class="btn btn-info ml-auto mr-1" href="login.php" role="button">Log in</a></li>
+		<?php if (!isset($_SESSION['loggedIn'])) {
+			echo("<li><a class='btn btn-info ml-auto mr-1' href='register.php' role='button'>Register</a></li>
+			<li><a class='btn btn-info ml-auto mr-1' href='login.php' role='button'>Login</a></li>");
+		} else {
+			echo("<li>
+				<div class='btn-group'>
+					<button class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" .
+						$_SESSION['username'] .
+					"</button>
+					<div class='dropdown-menu dropdown-menu-right'>
+						<a class='dropdown-item' href='createLaunch.php'>New Launch</a>
+						<a class='dropdown-item' href='scripts/userLogout.php'>Logout</a>
+					</div>					
+				</div>
+			</li>");
+		}
+		?>
 	</ul>
 </nav>
