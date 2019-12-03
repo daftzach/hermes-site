@@ -58,6 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$infoHTML .= "<div class='alert alert-success'>";
 			$infoHTML .= "<strong>Success!</strong> Account for <strong>";
 			$infoHTML .= $username . "</strong> has been created!</div>\n";
+			header("Location: http://itp.zacl.me/hermes/login.php");
 		} catch (PDOException $e) {
 			array_push($errors, $e->getMessage());
 		}

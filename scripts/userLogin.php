@@ -40,6 +40,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 				session_start();
 				$_SESSION['loggedIn'] = true;
 				$_SESSION['username'] = $username;
+				$_SESSION['userID'] = $user_id;
+				header("Location: http://itp.zacl.me/hermes/");
+
 			} else {
 				array_push($errors, "Password is incorrect.");
 			}
