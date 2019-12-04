@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="#">Hermes</a>
 	<ul class="navbar-nav mr-auto">
 		<li class="nav-item">
