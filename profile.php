@@ -14,7 +14,13 @@
 	$sql = "SELECT mission_name FROM flight WHERE flight_id = ?";
 	$statement = $connection->prepare($sql);
 	$statement->execute(array($flight_id));
-	$mission_name = $statement->fetchColumn();
+
+	if($statement->rowCount() == 0) {
+		header("Location: http://itp.zacl.me/hermes/");
+		exit;
+	} else {
+		$mission_name = $statement->fetchColumn();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -57,32 +63,38 @@
 					$toDisplay = $_GET['view'];
 					switch($toDisplay) {
 						case "alt": 
-							echo("<h2>Altitude</h2>");
+							echo("<h3>Altitude</h3>");
 							displayChart('altitude');
 							break;
 						case 'temp':
-							echo("<h2>Temperature</h2>");
+							echo("<h3>Temperature</h3>");
 							displayChart('temperature');
 							break;
 						case 'accel':
-							echo("<h2>Acceleration</h2>");
+							echo("<h3>Acceleration</h3>");
 							displayChart('acceleration');
 							break;				
 						case 'gyro':
-							echo("<h2>Gyroscope</h2>");
+							echo("<h3>Gyroscope</h3>");
 							displayChart('gyroscope');
 							break;			
 						case 'pwr':
-							echo("<h2>Power</h2>");
+							echo("<h3>Power</h3>");
 							displayChart('power');
 							break;
 						default:
-							echo("<h2>Overview</h2>");
+							echo("<h3>Overview</h3>");
 							displayChart('hello');
 					}
 
-					displayTable($flight_id); 
+					$headerNames = array("Time (UTC)", "Altitude (m)", "Pressure (hpa)");
+					$dbColumns = array('log_time', 'altitude', 'pressure'); 
+					$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);
 				?>
+				<h4>Raw Telemetry</h4>
+				<div class="table-responsive">
+				<?php echo($result); ?>
+				</div>
 			</div>
 		</div>
 	</div>

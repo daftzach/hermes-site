@@ -2,6 +2,11 @@ body {
   overflow-x: hidden;
 }
 
+h2 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
