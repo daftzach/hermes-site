@@ -32,6 +32,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<link href="styles/profile.css" rel="stylesheet">
+	<script src="../chartjs/Chart.min.js"></script>
 </head>
 <body>
 
@@ -40,10 +41,10 @@
 			<div class="sidebar-heading"><strong>Mission Dashboard</strong></div>
 			<div class="list-group list-group-flush">
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=overview"); ?> class="list-group-item list-group-item-action bg-light">Overview</a>
-				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=alt"); ?> class="list-group-item list-group-item-action bg-light">Altitude</a>
-				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=temp"); ?> class="list-group-item list-group-item-action bg-light">Temperature</a>
+				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=pos"); ?> class="list-group-item list-group-item-action bg-light">Positional</a>
+				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=atm"); ?> class="list-group-item list-group-item-action bg-light">Atmospheric</a>
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=accel"); ?> class="list-group-item list-group-item-action bg-light">Acceleration</a>
-				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=gyro"); ?> class="list-group-item list-group-item-action bg-light">Gyroscope</a>
+				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=gyro"); ?> class="list-group-item list-group-item-action bg-light">Gyroscopic</a>
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=pwr"); ?> class="list-group-item list-group-item-action bg-light">Power</a>
 			</div>
 		</div>
@@ -56,41 +57,45 @@
 
 			<div class="container-fluid">
 				<h2 class="border-bottom"><?php echo($mission_name) ?> Flight Data</h2>
-
 				<?php 
 					require_once( __DIR__ . '/scripts/profileGraph.php');
 					require_once( __DIR__ . '/scripts/profileTable.php');
 					$toDisplay = $_GET['view'];
 					switch($toDisplay) {
-						case "alt": 
-							echo("<h3>Altitude</h3>");
-							displayChart('altitude');
+						case 'pos': 
+							echo("<h3>Positional Telemetry</h3>");
+							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							echo($chart);
 							break;
-						case 'temp':
-							echo("<h3>Temperature</h3>");
-							displayChart('temperature');
+						case 'atm':
+							echo("<h3>Atmospheric Telemetry</h3>");
+							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							echo($chart);
 							break;
 						case 'accel':
-							echo("<h3>Acceleration</h3>");
-							displayChart('acceleration');
+							echo("<h3>Acceleration Telemetry</h3>");
+							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							echo($chart);
 							break;				
 						case 'gyro':
-							echo("<h3>Gyroscope</h3>");
-							displayChart('gyroscope');
+							echo("<h3>Gyroscopic Telemetry</h3>");
+							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							echo($chart);
 							break;			
 						case 'pwr':
-							echo("<h3>Power</h3>");
-							displayChart('power');
+							echo("<h3>Power Telemetry</h3>");
+							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							echo($chart);
 							break;
 						default:
 							echo("<h3>Overview</h3>");
-							displayChart('hello');
 					}
-
+					
 					$headerNames = array("Time (UTC)", "Altitude (m)", "Pressure (hpa)");
 					$dbColumns = array('log_time', 'altitude', 'pressure'); 
 					$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);
 				?>
+
 				<h4>Raw Telemetry</h4>
 				<div class="table-responsive">
 				<?php echo($result); ?>

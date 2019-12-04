@@ -20,6 +20,7 @@
 					"</button>
 					<div class='dropdown-menu dropdown-menu-right'>
 						<a class='dropdown-item' href='newflight.php'>New Launch</a>
+						<a class='dropdown-item' href='flights.php'>Flights</a>
 						<a class='dropdown-item' href='scripts/userLogout.php'>Logout</a>
 					</div>					
 				</div>
