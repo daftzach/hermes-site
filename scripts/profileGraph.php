@@ -1,8 +1,7 @@
 <?php  
-
 function getJSON($iniPath, $type, $id) {
 	$data = array();
-	
+
 	// Establish DB connection and run desired query
 	$connection = connectDB($iniPath);
 

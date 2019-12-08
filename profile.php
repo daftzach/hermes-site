@@ -66,6 +66,9 @@
 							echo("<h3>Positional Telemetry</h3>");
 							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
 							include('scripts/graphPositionalTelemetry.php');
+							$headerNames = array("Time (UTC)", "Altitude (m)");
+							$dbColumns = array('log_time', 'altitude'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);							
 							break;
 						case 'atm':
 							echo("<h3>Atmospheric Telemetry</h3>");
@@ -89,13 +92,11 @@
 							break;
 						default:
 							echo("<h3>Overview</h3>");
+							$headerNames = array("Time (UTC)", "Altitude (m)", "Pressure (hpa)");
+							$dbColumns = array('log_time', 'altitude', 'pressure'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);							
 					}
-					
-					$headerNames = array("Time (UTC)", "Altitude (m)", "Pressure (hpa)");
-					$dbColumns = array('log_time', 'altitude', 'pressure'); 
-					$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);
 				?>
-
 				<h4>Raw Telemetry</h4>
 				<div class="table-responsive">
 				<?php echo($result); ?>
