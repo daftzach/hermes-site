@@ -1,10 +1,8 @@
 <?php  
 
-function sqlDataToJSON($iniPath, $type, $id) {
+function getJSON($iniPath, $type, $id) {
 	$data = array();
-
-	$graph = "<h4>Graphed</h4>\n";
-
+	
 	// Establish DB connection and run desired query
 	$connection = connectDB($iniPath);
 
@@ -36,6 +34,6 @@ function sqlDataToJSON($iniPath, $type, $id) {
 	unset($records);
 	unset($connection);
 
-	echo $jsonData;
+	return $jsonData;
 }
 ?>

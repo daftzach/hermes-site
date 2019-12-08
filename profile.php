@@ -64,8 +64,8 @@
 					switch($toDisplay) {
 						case 'pos': 
 							echo("<h3>Positional Telemetry</h3>");
-							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
-							echo($chart);
+							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							include('scripts/graphPositionalTelemetry.php');
 							break;
 						case 'atm':
 							echo("<h3>Atmospheric Telemetry</h3>");
