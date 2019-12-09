@@ -75,23 +75,35 @@
 							break;
 						case 'atm':
 							echo("<h3>Atmospheric Telemetry</h3>");
-							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
-							echo($chart);
+							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							include('scripts/graphAtmosphericTelemetry.php');
+							$headerNames = array("Time (UTC)", "Altitude (m)", "Temperature (c)", "Pressure (hPa)", "Humidity (%)", "VOC Gas (KOhms)");
+							$dbColumns = array('log_time', 'altitude', 'temperature', 'pressure', 'humidity', 'gas'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;
 						case 'accel':
 							echo("<h3>Acceleration Telemetry</h3>");
-							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
-							echo($chart);
-							break;				
+							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							include('scripts/graphAccelerationTelemetry.php');
+							$headerNames = array("Time (UTC)", "Altitude", "X Acceleration", "Y Acceleration", "Z Acceleration");
+							$dbColumns = array('log_time', 'altitude', 'accelX', 'accelY', 'accelZ'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
+							break;			
 						case 'gyro':
 							echo("<h3>Gyroscopic Telemetry</h3>");
-							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
-							echo($chart);
+							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							include('scripts/graphGyroscopeTelemetry.php');
+							$headerNames = array("Time (UTC)", "Altitude", "X Gyroscope", "Y Gyroscope", "Z Gyroscope");
+							$dbColumns = array('log_time', 'altitude', 'gyroX', 'gyroY', 'gyroZ'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;			
 						case 'pwr':
 							echo("<h3>Power Telemetry</h3>");
-							$chart = sqlDataToJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
-							echo($chart);
+							$json = getJSON("../../dev/hermes/creds.ini", $toDisplay, $flight_id);
+							include('scripts/graphPowerTelemetry.php');
+							$headerNames = array("Time (UTC)", "Altitude", "Charge (%)", "Voltage (mV)");
+							$dbColumns = array('log_time', 'altitude', 'charge', 'voltage'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;
 						default:
 							echo("<h3>Overview</h3>");
