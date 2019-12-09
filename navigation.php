@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 
-<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<a class="navbar-brand" href="#">Hermes</a>
 	<ul class="navbar-nav mr-auto">
 		<li class="nav-item">
@@ -19,7 +19,8 @@
 						$_SESSION['username'] .
 					"</button>
 					<div class='dropdown-menu dropdown-menu-right'>
-						<a class='dropdown-item' href='createLaunch.php'>New Launch</a>
+						<a class='dropdown-item' href='newflight.php'>New Launch</a>
+						<a class='dropdown-item' href='flights.php'>Flights</a>
 						<a class='dropdown-item' href='scripts/userLogout.php'>Logout</a>
 					</div>					
 				</div>

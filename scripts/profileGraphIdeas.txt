@@ -1,0 +1,22 @@
+positional - 
+	altitude vs. time 
+
+atmospheric-
+	temperature vs altitude
+	pressure vs altitude
+	humidity vs altitude
+	VOC vs altitude
+
+acceleration -
+	x/y/z accel (in gs) vs time vs altitude
+	x/y/z accel (in m/s^2) vs time vs altitude
+
+gyroscopic -
+	x/y/z val vs time vs altitude
+	pitch vs time vs altitude
+	yaw vs time vs altitude
+	roll vs time vs altitude
+
+power -
+	charge vs time
+	voltage vs time
