@@ -170,7 +170,7 @@
         data: {
             labels: altitudeLabels,
             datasets: [{
-                label: 'VOC Gas Composition %',
+                label: 'VOC Gas Composition',
                 data: gas,
                 backgroundColor: 'rgba(221, 54, 28, 0.5)',
                 borderColor: 'rgba(221, 54, 28, 0.5)',
@@ -195,7 +195,7 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'VOC Gas Composition (%)'
+                        labelString: 'VOC Gas Composition (KOhms)'
                     }
                 }],                
             }
