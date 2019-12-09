@@ -47,25 +47,6 @@
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=gyro"); ?> class="list-group-item list-group-item-action bg-light">Gyroscopic</a>
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=pwr"); ?> class="list-group-item list-group-item-action bg-light">Power</a>
 			</div>
-			<!--
-			<?php 
-				/*  					
-				$sql = "SELECT owner FROM flight WHERE flight_id = ?";
-				$statement = $connection->prepare($sql);
-				$statement->execute(array($flight_id));
-				$owner_id = $statement->fetchColumn();
-					
-				$sql = "SELECT is_public FROM flight WHERE flight_id = ?";
-				$statement = $connection->prepare($sql);
-				$statement->execute(array($flight_id));
-				$visibility = $statement->fetchColumn();
-
-				if (isset($_SESSION['userID']) && $_SESSION['userID'] == $owner_id) {
-					include('scripts/ownerSettings.php');			
-				}
-				*/
-			?>
-			-->
 		</div>
 		<div id="page-content-wrapper">
 			<!-- Output nav -->
@@ -125,17 +106,21 @@
 							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;
 						default:
-							echo("<h3>Overview</h3>");
 							$headerNames = array("Time (UTC)", "Temperature (c)", "Pressure (hPa)", "Humidity (%)", "VOC Gas (KOhms)", "Altitude (m)", "X Acceleration", "Y Acceleration", "Z Acceleration", "X Gyroscope", "Y Gyroscope", "Z Gyroscope", "Battery Charge (%)", "Battery Voltage (mV)");
 							$dbColumns = array('log_time', 'temperature', 'pressure', 'humidity', 'gas', 'altitude', 'accelX', 'accelY', 'accelZ', 'gyroX', 'gyroY', 'gyroZ', 'charge', 'voltage'); 
-							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);
-							echo($result);							
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 					}
 				?>
-				<h4>Raw Telemetry</h4>
-				<div class="table-responsive">
-				<?php echo($result); ?>
-				</div>
+				<?php 
+					$sql = "SELECT owner FROM flight WHERE flight_id = ?";
+					$statement = $connection->prepare($sql);
+					$statement->execute(array($flight_id));
+					$owner_id = $statement->fetchColumn();
+						
+					if (isset($_SESSION['userID']) && $_SESSION['userID'] == $owner_id) {
+						echo("<h4>Raw Telemetry</h4><div class='table-responsive'>". $result . "</div>");			
+					}
+				?>
 			</div>
 		</div>
 	</div>
