@@ -1,8 +1,5 @@
 positional - 
-	altitude vs. time
-	longitude vs time
-	latitude vs time
-	heading vs time 
+	altitude vs. time 
 
 atmospheric-
 	temperature vs altitude

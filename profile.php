@@ -46,6 +46,7 @@
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=accel"); ?> class="list-group-item list-group-item-action bg-light">Acceleration</a>
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=gyro"); ?> class="list-group-item list-group-item-action bg-light">Gyroscopic</a>
 				<a href=<?php echo("profile.php" . "?flight=" . $flight_id . "&view=pwr"); ?> class="list-group-item list-group-item-action bg-light">Power</a>
+				<!-- TODO: check if user owns, can set to private -->
 			</div>
 		</div>
 
@@ -58,6 +59,8 @@
 			<div class="container-fluid">
 				<h2 class="border-bottom"><?php echo($mission_name) ?> Flight Data</h2>
 				<?php 
+
+
 					require_once( __DIR__ . '/scripts/profileGraph.php');
 					require_once( __DIR__ . '/scripts/profileTable.php');
 					$toDisplay = $_GET['view'];
@@ -92,8 +95,8 @@
 							break;
 						default:
 							echo("<h3>Overview</h3>");
-							$headerNames = array("Time (UTC)", "Altitude (m)", "Pressure (hpa)");
-							$dbColumns = array('log_time', 'altitude', 'pressure'); 
+							$headerNames = array("Time (UTC)", "Temperature (c)", "Pressure (hPa)", "Humidity (%)", "VOC Gas (KOhms)", "Altitude (m)", "X Acceleration", "Y Acceleration", "Z Acceleration", "X Gyroscope", "Y Gyroscope", "Z Gyroscope", "Battery Charge (%)", "Battery Voltage (mV)");
+							$dbColumns = array('log_time', 'temperature', 'pressure', 'humidity', 'gas', 'altitude', 'accelX', 'accelY', 'accelZ', 'gyroX', 'gyroY', 'gyroZ', 'charge', 'voltage'); 
 							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);							
 					}
 				?>

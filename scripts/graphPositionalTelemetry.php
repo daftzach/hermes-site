@@ -1,9 +1,11 @@
-<div style="width:50%;">
-    <canvas id="posChart"></canvas>
+<div class="d-flex justify-content-center">
+    <div style="width:75%;">
+        <canvas id="posChart"></canvas>
+    </div>
 </div>
 <script>
     var json = {"jsonarray":<?php echo($json); ?>};
-    var timeLables = json.jsonarray.map(function(e) {
+    var timeLabels = json.jsonarray.map(function(e) {
        return e.time;
     });
     var altitude = json.jsonarray.map(function(e) {
@@ -13,7 +15,7 @@
     var posChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: timeLables,
+            labels: timeLabels,
             datasets: [{
                 label: 'Altitude',
                 data: altitude,
@@ -21,6 +23,29 @@
                 borderColor: 'rgba(221, 54, 28, 0.5)',
                 fill: false,
             }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: "Altitude vs. Time"
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Altitude (Sea Level) (m)'
+                    }
+                }],                
+            }
         }
     });
 </script>

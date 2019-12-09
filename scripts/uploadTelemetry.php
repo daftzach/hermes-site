@@ -1,7 +1,7 @@
 <?php  
 require_once( __DIR__ . '/sqlConfig.php');
 
-$requiredFields = ['altitude'];
+$requiredFields = ['imei', 'fi', 'xA', 'yA', 'zA', 'xG', 'yG', 'zG', 'a', 't', 'p', 'h', 'g', 'c', 'v'];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -26,14 +26,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	// Verify flight_id is present and validate it
-	if(!isset($_POST["flight_id"]) || strlen(trim($_POST["flight_id"])) == 0) {
-		echo("flight_id is empty! Aborting!");
+	if(!isset($_POST["fi"]) || strlen(trim($_POST["fi"])) == 0) {
+		echo("fi is empty! Aborting!");
 		die();
 	} else {
 		// Validate flight exists in devices in valid devices table
 		$sql = "SELECT imei FROM flight WHERE flight_id = ?";
 		$statement = $connection->prepare($sql);
-		$statement->execute(array($_POST["flight_id"]));
+		$statement->execute(array($_POST["fi"]));
 		if ($statement->rowCount() <= 0) {
 			echo("Invalid flight id! Aborting!");
 			die();
@@ -43,20 +43,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			if ($flight_id_row['imei'] != $imei) {
 				echo($flight_id_row['imei']);
 				echo($imei);
-				echo("This device has no authority over this flight number.");
+				echo("This device has no authority over this flight number! Aborting!");
 				die();
 			}
 			unset($flight_id_row);
-			$flight_id = $_POST["flight_id"];
 		}
 
+	// Verify all fields are set
 	foreach($requiredFields as $field) {
-		
+		if(!isset($_POST[$field]) || strlen(trim($_POST[$field])) == 0) {
+			echo($field . " is empty! Aborting!");
+			die();
+		}
+	}
+
+	$flight_id = $_POST["fi"];
+	$temperature = $_POST["t"];
+	$pressure = $_POST["p"];
+	$humidity = $_POST["h"];
+	$gas = $_POST["g"];
+	$altitude = $_POST["a"];
+	$accelX = $_POST["xA"];
+	$accelY = $_POST["yA"];
+	$accelZ = $_POST["zA"];
+	$gyroX = $_POST["xG"];
+	$gyroY = $_POST["yG"];
+	$gyroZ = $_POST["zG"];
+	$charge = $_POST["c"];
+	$voltage = $_POST["v"];
+
+//$requiredFields = ['imei', 'fi', 'xA', 'yA', 'zA', 'xG', 'yG', 'zG', 'a', 't', 'p', 'h', 'g', 'c', 'v'];
+	$sql = "INSERT INTO flight_data(flight_id, temperature, pressure, humidity, gas, altitude, accelX, accelY, accelZ, gyroX, gyroY, gyroZ, charge, voltage)";
+	$sql .= "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	try {
+		$statement = $connection->prepare($sql);
+		$statement->execute(array($flight_id, $temperature, $pressure, $humidity, $gas, $altitude, $accelX, $accelY, $accelZ, $gyroX, $gyroY, $gyroZ, $charge, $voltage));
+	} catch (PDOException $e) {
+		echo($e->getMessage());
 	}
 
 	echo("TELEMETRY SENT!");
 
 	unset($statement);
 	unset($connection);
+	}
 }
 ?>
