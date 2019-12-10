@@ -130,25 +130,3 @@
 	?>
 </body>
 </html>
-				
-					}
-				?>
-				<?php 
-					$sql = "SELECT owner FROM flight WHERE flight_id = ?";
-					$statement = $connection->prepare($sql);
-					$statement->execute(array($flight_id));
-					$owner_id = $statement->fetchColumn();
-						
-					if (isset($_SESSION['userID']) && $_SESSION['userID'] == $owner_id) {
-						echo("<h4>Raw Telemetry</h4><div class='table-responsive'>". $result . "</div>");			
-					}
-				?>
-			</div>
-		</div>
-	</div>
-	<!-- Output footer -->
-	<?php
-	include('footer.php');
-	?>
-</body>
-</html>
