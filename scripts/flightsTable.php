@@ -18,17 +18,27 @@ function displayFlightTable($iniPath, $userID, $headingNames) {
 
 		$table .= "<table class='table table-striped table-lg'>";
 		$table .= "<thead><tr>";
+
 		foreach ($headingNames as $names) {
 			$table .= "<th scope='col'>" . $names . "</th>";
 		}
+
 		$table .= "</tr></thead>";
 		$table .= "<tbody>";
+		
+		if ($records->rowCount() <= 0) {
+			$table .= "<tr>";
+			$table .= "<th scope='row'>No flights yet!</th>";
+			$table .= "<td></td>";
+			$table .= "</tr>";
+		}
+
 		foreach( $result as $row )
 		{
-		    $table .= "<tr>";
-		    $table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
-		    $table .= "<td>" . $row['vessel_name'] . "</td>";
-		    $table .= "</tr>";
+			$table .= "<tr>";
+			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
+			$table .= "<td>" . $row['vessel_name'] . "</td>";
+			$table .= "</tr>";
 		}	
 	} else {
 		$sql = "SELECT flight.flight_id, flight.mission_name, flight.vessel_name, users.username FROM flight INNER JOIN users ON flight.owner = users.user_id";
@@ -44,11 +54,11 @@ function displayFlightTable($iniPath, $userID, $headingNames) {
 		$table .= "<tbody>";
 		foreach( $result as $row )
 		{
-		    $table .= "<tr>";
-		    $table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
-		    $table .= "<td>" . $row['vessel_name'] . "</td>";
-		    $table .= "<td>" . $row['username'] . "</td>";
-		    $table .= "</tr>";
+			$table .= "<tr>";
+			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
+			$table .= "<td>" . $row['vessel_name'] . "</td>";
+			$table .= "<td>" . $row['username'] . "</td>";
+			$table .= "</tr>";
 		}		
 	}
 	unset($records);
