@@ -21,8 +21,15 @@
 	include ( __DIR__ . '/scripts/flightCreate.php' );
 	?>
 
+	<div class="jumbotron">
+		<div class="text-center">
+			<h1>Flight Registration</h1>
+		</div>
+	</div>
+
 	<div class="container" id="wrapper">
-		<h1>Create Future Flight</h1>
+		<p>Below is a form the create a new flight. A new flight must be created if you would like to log data seperately outside of an existing mission. The IMEI is crucial: double, triple, quadruple check it was typed in correctly, or Hermes will not be able to log your telemetry! The flight should become visible under the flights directory immediately after it is successfully registered.</p>
+
 		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 			<fieldset>
 				<legend>New Flight</legend>

@@ -10,11 +10,13 @@
 	<ul class="nav navbar-nav navbar-right">
 		<!-- Only display if user logged out -->
 		<?php if (!isset($_SESSION['loggedIn'])) {
-			echo("<li><a class='btn btn-info ml-auto mr-1' href='register.php' role='button'>Register</a></li>
-			<li><a class='btn btn-info ml-auto mr-1' href='login.php' role='button'>Login</a></li>");
+			echo("<div class='btn-group' role='group' aria-label='Account'>
+				<a class='btn btn-info ml-auto mr-1' href='register.php' role='button'>Register</a>
+				<a class='btn btn-info ml-auto mr-1' href='login.php' role='button'>Login</a>
+				</div>");
 		} else {
 			echo("<li>
-				<div class='btn-group'>
+				<div class='btn-group' role='group'>
 					<button class='btn btn-info dropdown-toggle' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>" .
 						$_SESSION['username'] .
 					"</button>

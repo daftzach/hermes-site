@@ -67,7 +67,7 @@ function getJSON($iniPath, $type, $id) {
 
 		$jsonData = json_encode($data);
 	} else {
-		echo("ERROR! Invalid graph data type.");
+		echo("Invalid graph type!");
 	}
 
 	unset($records);
