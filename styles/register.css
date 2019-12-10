@@ -15,7 +15,7 @@ body {
   justify-content: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-image: url("../../res/img/stars.png");
+  background-image: url("../res/stars.png");
   background-color: #000000;
 }
 

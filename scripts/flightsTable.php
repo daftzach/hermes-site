@@ -36,7 +36,7 @@ function displayFlightTable($iniPath, $userID, $headingNames) {
 		foreach( $result as $row )
 		{
 			$table .= "<tr>";
-			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
+			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "' target='_blank'>" . $row['mission_name'] . "</a></th>";
 			$table .= "<td>" . $row['vessel_name'] . "</td>";
 			$table .= "</tr>";
 		}	
@@ -55,7 +55,7 @@ function displayFlightTable($iniPath, $userID, $headingNames) {
 		foreach( $result as $row )
 		{
 			$table .= "<tr>";
-			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'>" . $row['mission_name'] . "</a></th>";
+			$table .= "<th scope='row'><a href='profile.php?flight=". $row['flight_id'] . "'' target='_blank'>" . $row['mission_name'] . "</a></th>";
 			$table .= "<td>" . $row['vessel_name'] . "</td>";
 			$table .= "<td>" . $row['username'] . "</td>";
 			$table .= "</tr>";

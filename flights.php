@@ -22,7 +22,9 @@
 	?>
 
 	<div class="jumbotron">
-		<h1>Flight Directory</h1>
+		<div class="text-center">
+			<h1>Flight Directory</h1>
+		</div>
 	</div>
 
 	<div class="container" id="wrapper">
@@ -41,7 +43,7 @@
 				$allFlights = displayFlightTable("../../dev/hermes/creds.ini", -1, $flightsHeaders);
 
 				if($loggedIn) {
-					echo("<div class='col-sm'><h1>My Flights</h1>");
+					echo("<div class='col-sm'><h1>My Flights <a class='btn-sm btn-secondary' href='newflight.php' role='button'>New &raquo;</a></h1>");
 					echo($myFlights);
 					echo("</div>");
 				}
