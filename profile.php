@@ -106,9 +106,7 @@
 							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;
 						default:
-							$headerNames = array("Time (UTC)", "Temperature (c)", "Pressure (hPa)", "Humidity (%)", "VOC Gas (KOhms)", "Altitude (m)", "X Acceleration", "Y Acceleration", "Z Acceleration", "X Gyroscope", "Y Gyroscope", "Z Gyroscope", "Battery Charge (%)", "Battery Voltage (mV)");
-							$dbColumns = array('log_time', 'temperature', 'pressure', 'humidity', 'gas', 'altitude', 'accelX', 'accelY', 'accelZ', 'gyroX', 'gyroY', 'gyroZ', 'charge', 'voltage'); 
-							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
+							echo("<p>Select a data category.</p>");					
 					}
 				?>
 				<?php 
