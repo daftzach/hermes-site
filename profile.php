@@ -106,7 +106,31 @@
 							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
 							break;
 						default:
-							echo("<p>Select a data category.</p>");					
+							$headerNames = array("Time (UTC)", "Temperature (c)", "Pressure (hPa)", "Humidity (%)", "VOC Gas (KOhms)", "Altitude (m)", "X Acceleration", "Y Acceleration", "Z Acceleration", "X Gyroscope", "Y Gyroscope", "Z Gyroscope", "Battery Charge (%)", "Battery Voltage (mV)");
+							$dbColumns = array('log_time', 'temperature', 'pressure', 'humidity', 'gas', 'altitude', 'accelX', 'accelY', 'accelZ', 'gyroX', 'gyroY', 'gyroZ', 'charge', 'voltage'); 
+							$result = displayTelemetryTable("../../dev/hermes/creds.ini", $flight_id, $headerNames, $dbColumns);						
+					}
+				?>
+				<?php 
+					$sql = "SELECT owner FROM flight WHERE flight_id = ?";
+					$statement = $connection->prepare($sql);
+					$statement->execute(array($flight_id));
+					$owner_id = $statement->fetchColumn();
+						
+					if (isset($_SESSION['userID']) && $_SESSION['userID'] == $owner_id) {
+						echo("<h4>Raw Telemetry</h4><div class='table-responsive'>". $result . "</div>");			
+					}
+				?>
+			</div>
+		</div>
+	</div>
+	<!-- Output footer -->
+	<?php
+	include('footer.php');
+	?>
+</body>
+</html>
+				
 					}
 				?>
 				<?php 
