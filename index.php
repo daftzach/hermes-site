@@ -32,7 +32,7 @@
 					<p><a class="btn btn-secondary" href="flights.php" role="button">Flight Logs &raquo;</a></p>
 				</div>
 				<div class="col-md-4">
-					<h3>Flexibilty to Work in Any Rocket</h3>
+					<h3>Flexibility to Work in Any Rocket</h3>
 					<p>Very compact and light, requiring minimal space for all the telemetry this device transmits. Easy to integrate into your rocket so long as it has a payload bay. Create an account to start the integration process.</p>
 					<p><a class="btn btn-secondary" href="register.php" role="button">Create Account &raquo;</a></p>
 				</div>
