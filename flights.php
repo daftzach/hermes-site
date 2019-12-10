@@ -26,28 +26,33 @@
 	</div>
 
 	<div class="container" id="wrapper">
-		<?php 
-			require_once( __DIR__ . '/scripts/flightsTable.php');
+		<div class="row">
+			<?php 
+				require_once( __DIR__ . '/scripts/flightsTable.php');
 
-			if ($loggedIn) {
-				$myFlightsHeaders = array("Mission Name", "Launch Vehicle");
-				$myFlights  = displayFlightTable("../../dev/hermes/creds.ini", $_SESSION['userID'], $myFlightsHeaders);
-			} else {
-				$myFlights = "";
-			}
+				if ($loggedIn) {
+					$myFlightsHeaders = array("Mission Name", "Launch Vehicle");
+					$myFlights  = displayFlightTable("../../dev/hermes/creds.ini", $_SESSION['userID'], $myFlightsHeaders);
+				} else {
+					$myFlights = "";
+				}
 
-			$flightsHeaders = array("Mission Name", "Launch Vehicle", "Owner");
-			$allFlights = displayFlightTable("../../dev/hermes/creds.ini", -1, $flightsHeaders);
+				$flightsHeaders = array("Mission Name", "Launch Vehicle", "Owner");
+				$allFlights = displayFlightTable("../../dev/hermes/creds.ini", -1, $flightsHeaders);
 
-			if($loggedIn) {
-				echo("<h1>My Flights</h1>");
-				echo($myFlights);
-			}
-
-			echo("<h1>All Flights</h1>");
-			echo($allFlights);
-		?>
-
+				if($loggedIn) {
+					echo("<div class='col-sm'><h1>My Flights</h1>");
+					echo($myFlights);
+					echo("</div>");
+				}
+			?>
+			<div class="col-sm">
+				<?php 
+					echo("<h1>All Flights</h1>");
+					echo($allFlights);
+				?>
+			</div>
+		</div>
 	</div>
 
 	<!-- Output footer -->
